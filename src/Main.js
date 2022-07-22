@@ -7,7 +7,7 @@ function Main(){
     const [coinData, setCoinData] = useState([])
     const getData = async () => {
         try{
-            const response = await fetch('https://test.loobr.com/getCoins', {mode : 'cors'});
+            const response = await fetch('http://localhost:8080/getCoins', {mode : 'cors'});
             const data  = await response.json();
             setCoinData(data.data);
         }catch(e){

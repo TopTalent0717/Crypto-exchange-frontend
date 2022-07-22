@@ -35,7 +35,7 @@ function Deposit(){
 
     const getAcceptedCoins = async () => {
         try{
-            const response = await fetch('https://test.loobr.com/getRates', {mode : 'cors'});
+            const response = await fetch('http://localhost:8080/getRates', {mode : 'cors'});
             const data = await response.json();
             setAcceptedCoins(Object.values(data));
             setAcceptedCoinsNames(Object.keys(data));
@@ -89,7 +89,7 @@ function Deposit(){
             };
             let response;
             try {
-                response = await fetch(`https://test.loobr.com/createTx/${name}/${amount}`, requestOptions);  
+                response = await fetch(`http://localhost:8080/createTx/${name}/${amount}`, requestOptions);  
                 const data = await response.json();  
                 setQrImage(data.qrcode_url);
                 setResult(data.amount);
