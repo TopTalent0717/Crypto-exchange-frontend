@@ -58,7 +58,7 @@ function Profile(){
     const [merchant, setMerchant] = useState('');
     const getBasicInfo = async () => {
         try{
-            const response = await fetch('http://localhost:8080/getInfo', {mode : 'cors'});
+            const response = await fetch('https://test.loobr.com/getInfo', {mode : 'cors'});
             const data = await response.json();
             setEmail(data.email);
             setUsername(data.username);
@@ -71,7 +71,7 @@ function Profile(){
 
     const getTxList = async() => {
         try{
-            const response = await fetch('http://localhost:8080/getTx', {mode : 'cors'});
+            const response = await fetch('https://test.loobr.com/getTx', {mode : 'cors'});
             const data = await response.json();
             setTxData(data);
 
