@@ -46,7 +46,7 @@ function Exchange(){
 
     const getAcceptedCoins = async () => {
         try{
-            const response = await fetch('http://localhost:8080/getRates', {mode : 'cors'});
+            const response = await fetch('https://test.loobr.com/getRates', {mode : 'cors'});
             const data = await response.json();
             setAcceptedCoins(Object.values(data));
             setAcceptedCoinsNames(Object.keys(data));
@@ -98,7 +98,7 @@ function Exchange(){
 
     const getBalances = async () => {
         try{    
-            const response = await fetch('http://localhost:8080/getBalances', {mode : 'cors'});
+            const response = await fetch('https://test.loobr.com/getBalances', {mode : 'cors'});
             const data = await response.json();
             setBalances(Object.values(data))
             setCoinNames(Object.keys(data));
