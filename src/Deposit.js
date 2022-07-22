@@ -120,7 +120,7 @@ function Deposit(){
                 <div className="container-7b">
                     <Grid container spacing={2}>
                       <Grid item xs={3}>
-                    <FormControl>
+                    <FormControl> 
                       <FormLabel id="demo-radio-buttons-group-label">Deposit Type:</FormLabel>
                       <RadioGroup
                         aria-labelledby="demo-radio-buttons-group-label"
