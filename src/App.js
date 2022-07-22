@@ -1,11 +1,24 @@
 import Header from "./Header";
 import Footer from "./Footer";
-
+import { useEffect } from "react";
 
 function App() {
+
+  useEffect(() => {
+    localStorage.removeItem('deposit');
+    localStorage.removeItem('main');
+    localStorage.removeItem('profile');
+    localStorage.removeItem('exchange');
+    if (!localStorage.getItem('login') )
+    {
+      window.location.reload();
+      localStorage.setItem('login', true);
+    }
+}, [])
+
   return (
     <div>
-      <Header />
+      <Header name="login" />
       <div className="section home-hero wf-section">
         <div className="container-7">
           <div className="two-col-grid">

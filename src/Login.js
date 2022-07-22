@@ -1,6 +1,5 @@
 import Footer from "./Footer";
-import {Helmet} from "react-helmet";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {useState} from 'react';
 
 function Login(){
@@ -17,6 +16,7 @@ function Login(){
     }
   }
     return(
+      <div>
         <div>
             <div className="container-6 w-container signup wf-section" id="signup">
             <div id="formular" className="div-block-12">
@@ -51,11 +51,8 @@ function Login(){
               </div>
             </div>
             </div>
+            </div>
             <Footer />
-            <Helmet>
-                <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6018add6d52fe351d4ac86c4" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-                <script src="js/cointego.js" type="text/javascript"></script>
-            </Helmet>
         </div>
     )
 }
