@@ -6,13 +6,22 @@ function Login(){
   let navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
-  const check = () => {
-    if(email == 'wv@v2.ag' && pass == 'walter')
-    {
-      navigate("/main");
-    }else{
+
+  const check = async() => {
+    try{
+      const response = await fetch('https://test.loobr.com/getUser', {mode : 'cors'});
+      const data = await response.json();
+      
+      data.map((user, index) => {
+        if(user.email == email && user.pass == pass)
+          navigate("/main");
+      })
+      
       setEmail('');
       setPass('');
+
+    }catch(e){
+      console.log(e);
     }
   }
     return(
@@ -37,12 +46,6 @@ function Login(){
                 <label className="form-label">Password</label>
                 <input type="password" className="formfield w-input" maxLength="256" name="Password" data-name="PASSWORD" onChange={e => setPass(e.target.value)} placeholder="Password" id="PASSWORD" required="" value={pass}/>
                 <button onClick={check} data-wait="Please wait..." className="formsubmitbutton w-button">Login</button>
-              </div>
-              <div className="w-form-done">
-                <div>Thank you! Your submission has been received!</div>
-              </div>
-              <div className="w-form-fail">
-                <div>Oops! Something went wrong while submitting the form.</div>
               </div>
               <div>
                 <div>

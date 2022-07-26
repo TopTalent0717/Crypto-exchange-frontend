@@ -1,5 +1,4 @@
 import Footer from "./Footer";
-import { Link } from "react-router-dom";
 import React, {useEffect, useState} from 'react'
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
@@ -8,10 +7,10 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Switch from '@mui/material/Switch';
+
 import Payment from './Payment';
 import Header from "./Header";
+import User from "./User";
 
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
@@ -56,6 +55,42 @@ function Profile(){
     const [username, setUsername] = useState('');
     const [public_name, setPublic_name] = useState('');
     const [merchant, setMerchant] = useState('');
+    const [users, setUsers] = useState([]);
+    
+    const getUser = async() => {
+      try{
+      const response = await fetch('https://test.loobr.com/getUser', {mode : 'cors'});
+      const data =  await response.json();
+      setUsers(data);
+      }catch(e){
+        console.log(e);
+      }
+
+    }
+
+    const getInfo = async (email, status) => {
+
+          const requestOptions = {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' }
+          };
+          let response;
+          let result;
+          if(status == true)
+              result = "true"
+          else
+            result = "false"
+          console.log(result);
+          try {
+              response = await fetch(`https://test.loobr.com/updateUser/${email}/${result}`, requestOptions);  
+              const data = await response.json();  
+              
+          } catch (error) {
+              console.log(error)
+          }
+    
+  }
+
     const getBasicInfo = async () => {
         try{
             const response = await fetch('https://test.loobr.com/getInfo', {mode : 'cors'});
@@ -81,6 +116,8 @@ function Profile(){
     }
 
      useEffect(() => {
+       
+        getUser();
         getBasicInfo();
         getTxList();
         localStorage.removeItem('deposit');
@@ -185,9 +222,9 @@ function Profile(){
                         </tr>
                     </thead>
                     <tbody>
-                        {txData.slice(0, 10).map((pay, index) => {
+                        {/* {txData.slice(0, 10).map((pay, index) => {
                             return <Payment key={index} coin={pay.coin} txid={pay.txid} amount={pay.amountf} address={pay.payment_address} status={pay.status_text} ip={pay.sender_ip} index={index}/>
-                        })}
+                        })} */}
                     </tbody>
                     </table>
                       </TabPanel>
@@ -196,15 +233,17 @@ function Profile(){
                     <thead className="bg-light">
                         <tr>
                         <th>No</th>
+                        <th>FirstName</th>
+                        <th>LastName</th>
                         <th>Email</th>
-                        <th>Name</th>
-                        <th>Password</th>
-                        <th>Role</th>
                         <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                   
+                        
+                    {users.map((user, index) => {
+                          return <User firstname={user.firstname} lastname={user.lastname} email={user.email} status={user.status} index={index} key={index} getInfo={getInfo}/>
+                    })}
                    
                     </tbody>
                     </table>

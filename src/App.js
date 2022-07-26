@@ -1,8 +1,29 @@
 import Header from "./Header";
 import Footer from "./Footer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
+
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [email, setEmail] = useState('');
+  const [pass, setPass] = useState('');
+  const [error, setError] = useState('');
+
+  const signup = async() => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    };
+    let response;
+    try {
+        response = await fetch(`https://test.loobr.com/createUser/${firstname}/${lastname}/${email}/${pass}`, requestOptions);  
+        const data = await response.json();  
+        setError(data.success);
+    } catch (error) {
+        console.log(error)
+    }
+  }
 
   useEffect(() => {
     localStorage.removeItem('deposit');
@@ -90,24 +111,26 @@ function App() {
                   <li className="list-item-2">Secure personal wallet</li>
                 </ul>
               </div>
-              <form className="form-2" id="wf-form-Email-Form" name="wf-form-Email-Form">
+              <div className="form-2" id="wf-form-Email-Form" name="wf-form-Email-Form">
                 <label  className="form-label">First Name</label>
-                <input type="text" className="formfield w-input" maxLength="256" name="FNAME" data-name="FNAME" placeholder="First Name" id="FNAME" required="" />
+                <input type="text" className="formfield w-input" maxLength="256" name="FNAME" data-name="FNAME" placeholder="First Name" id="FNAME" required="" onChange={(e) => setFirstname(e.target.value)} />
                 <label  className="form-label">Last Name</label>
-                <input type="text" className="formfield w-input" maxLength="256" name="LNAME" data-name="LNAME" placeholder="Last Name" id="LNAME" required="" />
+                <input type="text" className="formfield w-input" maxLength="256" name="LNAME" data-name="LNAME" placeholder="Last Name" id="LNAME" required="" onChange={(e) => setLastname(e.target.value)}/>
                 <label  className="form-label">E-Mail</label>
-                <input type="email" className="formfield w-input" maxLength="256" name="EMAIL" data-name="EMAIL" placeholder="E-Mail" id="EMAIL" required="" />
+                <input type="email" className="formfield w-input" maxLength="256" name="EMAIL" data-name="EMAIL" placeholder="E-Mail" id="EMAIL" required="" onChange={(e) => setEmail(e.target.value)}/>
                 <label className="form-label">Password</label>
-                <input type="password" className="formfield w-input" maxLength="256" name="Password" data-name="PASSWORD" placeholder="Password" id="PASSWORD" required="" />
-
-                <input type="submit" value="Sign-Up" data-wait="Please wait..." className="formsubmitbutton w-button" />
-              </form>
-              <div className="w-form-done">
+                <input type="password" className="formfield w-input" maxLength="256" name="Password" data-name="PASSWORD" placeholder="Password" id="PASSWORD" required="" onChange={(e) => setPass(e.target.value)}/>
+                <input type="submit" value="Sign-Up" data-wait="Please wait..." className="formsubmitbutton w-button" onClick={signup}/>
+              </div>
+              {error === "created" ? (
+              <div className="w-form-done" >
                 <div>Thank you! Your submission has been received!</div>
-              </div>
+              </div>): null
+              }
+              {error === "already" ? ( 
               <div className="w-form-fail">
-                <div>Oops! Something went wrong while submitting the form.</div>
-              </div>
+                <div>Oops! Account already existed!</div>
+              </div>) : null}
               <div>
                 <div>
                   <div className="form-disclaimer-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed viverra augue a enim hendrerit, ut rutrum diam molestie. Sed semper non ex a pretium. Suspendisse sed ex eu ante rutrum tincidunt. Sed tincidunt urna felis, in auctor elit pretium vel. In hac habitasse platea dictumst. Pellentesque vel sagittis est, sit amet gravida lacus. Ut rhoncus est ac lobortis aliquam. Vivamus pharetra ligula nec mi ultricies, vitae gravida velit rhoncus. Vestibulum consectetur, ante eu tempus fringilla, leo ligula pulvinar nibh, eget pretium justo sem eget ex.</div>

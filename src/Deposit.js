@@ -84,8 +84,7 @@ function Deposit(){
         if (parseInt(amount) > 0) {
             const requestOptions = {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name : name, amount : amount})
+                headers: { 'Content-Type': 'application/json' }
             };
             let response;
             try {
