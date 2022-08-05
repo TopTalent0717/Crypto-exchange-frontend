@@ -59,7 +59,7 @@ function Profile(){
     
     const getUser = async() => {
       try{
-      const response = await fetch('https://test.loobr.com/getUser', {mode : 'cors'});
+      const response = await fetch('http://localhost:8080/getUser', {mode : 'cors'});
       const data =  await response.json();
       setUsers(data);
       }catch(e){
@@ -82,7 +82,7 @@ function Profile(){
             result = "false"
           console.log(result);
           try {
-              response = await fetch(`https://test.loobr.com/updateUser/${email}/${result}`, requestOptions);  
+              response = await fetch(`http://localhost:8080/updateUser/${email}/${result}`, requestOptions);  
               const data = await response.json();  
               
           } catch (error) {
@@ -93,7 +93,7 @@ function Profile(){
 
     const getBasicInfo = async () => {
         try{
-            const response = await fetch('https://test.loobr.com/getInfo', {mode : 'cors'});
+            const response = await fetch('http://localhost:8080/getInfo', {mode : 'cors'});
             const data = await response.json();
             setEmail(data.email);
             setUsername(data.username);
@@ -106,7 +106,7 @@ function Profile(){
 
     const getTxList = async() => {
         try{
-            const response = await fetch('https://test.loobr.com/getTx', {mode : 'cors'});
+            const response = await fetch('http://localhost:8080/getTx', {mode : 'cors'});
             const data = await response.json();
             setTxData(data);
 
@@ -222,9 +222,9 @@ function Profile(){
                         </tr>
                     </thead>
                     <tbody>
-                        {/* {txData.slice(0, 10).map((pay, index) => {
+                        {txData.slice(0, 10).map((pay, index) => {
                             return <Payment key={index} coin={pay.coin} txid={pay.txid} amount={pay.amountf} address={pay.payment_address} status={pay.status_text} ip={pay.sender_ip} index={index}/>
-                        })} */}
+                        })}
                     </tbody>
                     </table>
                       </TabPanel>

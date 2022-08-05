@@ -9,9 +9,9 @@ function Login(){
 
   const check = async() => {
     try{
-      const response = await fetch('https://test.loobr.com/getUser', {mode : 'cors'});
+      const response = await fetch('http://localhost:8080/getUser1', {mode : 'cors'});
       const data = await response.json();
-      
+      console.log(data);
       data.map((user, index) => {
         if(user.email == email && user.pass == pass)
           navigate("/main");

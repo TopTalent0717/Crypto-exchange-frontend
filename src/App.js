@@ -17,7 +17,7 @@ function App() {
     };
     let response;
     try {
-        response = await fetch(`https://test.loobr.com/createUser/${firstname}/${lastname}/${email}/${pass}`, requestOptions);  
+        response = await fetch(`http://localhost:8080/createUser/${firstname}/${lastname}/${email}/${pass}`, requestOptions);  
         const data = await response.json();  
         setError(data.success);
     } catch (error) {
