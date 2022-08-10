@@ -52,14 +52,16 @@ function Profile(){
     const [value, setValue] = React.useState(0);
     const [txData, setTxData] = useState([]);
     const [email, setEmail] = useState('');
-    const [username, setUsername] = useState('');
-    const [public_name, setPublic_name] = useState('');
-    const [merchant, setMerchant] = useState('');
+    // const [username, setUsername] = useState('');
+    // const [public_name, setPublic_name] = useState('');
+    // const [merchant, setMerchant] = useState('');
+    const [firstname, setFirstname] = useState('');
+    const [lastname, setLastname] = useState('');
     const [users, setUsers] = useState([]);
     
     const getUser = async() => {
       try{
-      const response = await fetch('http://localhost:8080/getUser', {mode : 'cors'});
+      const response = await fetch('https://test.loobr.com/getUser', {mode : 'cors'});
       const data =  await response.json();
       setUsers(data);
       }catch(e){
@@ -82,7 +84,7 @@ function Profile(){
             result = "false"
           console.log(result);
           try {
-              response = await fetch(`http://localhost:8080/updateUser/${email}/${result}`, requestOptions);  
+              response = await fetch(`https://test.loobr.com/updateUser/${email}/${result}`, requestOptions);  
               const data = await response.json();  
               
           } catch (error) {
@@ -91,22 +93,22 @@ function Profile(){
     
   }
 
-    const getBasicInfo = async () => {
-        try{
-            const response = await fetch('http://localhost:8080/getInfo', {mode : 'cors'});
-            const data = await response.json();
-            setEmail(data.email);
-            setUsername(data.username);
-            setPublic_name(data.public_name);
-            setMerchant(data.merchant_id);
-            }catch(e){
-            console.log(e);
-        }
-    }
+    // const getBasicInfo = async () => {
+    //     try{
+    //         const response = await fetch('https://test.loobr.com/getInfo', {mode : 'cors'});
+    //         const data = await response.json();
+    //         setEmail(data.email);
+    //         setUsername(data.username);
+    //         setPublic_name(data.public_name);
+    //         setMerchant(data.merchant_id);
+    //         }catch(e){
+    //         console.log(e);
+    //     }
+    // }
 
     const getTxList = async() => {
         try{
-            const response = await fetch('http://localhost:8080/getTx', {mode : 'cors'});
+            const response = await fetch('https://test.loobr.com/getTx', {mode : 'cors'});
             const data = await response.json();
             setTxData(data);
 
@@ -118,8 +120,11 @@ function Profile(){
      useEffect(() => {
        
         getUser();
-        getBasicInfo();
+        // getBasicInfo();
         getTxList();
+        setEmail(localStorage.getItem('email'));
+        setFirstname(localStorage.getItem('firstname'));
+        setLastname(localStorage.getItem('lastname'));
         localStorage.removeItem('deposit');
         localStorage.removeItem('login');
         localStorage.removeItem('main');
@@ -158,13 +163,13 @@ function Profile(){
                                      <TextField id="outlined-basic" label="FirstName" variant="standard" disabled />
                                 </Grid>
                                 <Grid item xs={3}>
-                                     <TextField id="outlined-basic" label="Walter" variant="standard" disabled />
+                                     <TextField id="outlined-basic" label={firstname} variant="standard" disabled />
                                 </Grid>
                                 <Grid item xs={3}>
                                      <TextField id="outlined-basic" label="LastName" variant="standard" disabled />
                                 </Grid>
                                 <Grid item xs={3}>
-                                     <TextField id="outlined-basic" label="VHoldings" variant="standard" disabled />
+                                     <TextField id="outlined-basic" label={lastname} variant="standard" disabled />
                                 </Grid>
                                   <Grid item xs={3}>
                                      <TextField id="outlined-basic" label="Email" variant="standard" disabled />
@@ -172,19 +177,19 @@ function Profile(){
                                 <Grid item xs={3}>
                                      <TextField id="outlined-basic" label={email} variant="standard" disabled />
                                 </Grid>
-                                <Grid item xs={3}>
+                                {/* <Grid item xs={3}>
                                      <TextField id="outlined-basic" label="UserName" variant="standard" disabled />
                                 </Grid>
                                 <Grid item xs={3}>
                                      <TextField id="outlined-basic" label={username} variant="standard" disabled />
-                                </Grid>
-
+                                </Grid> */}
+{/* 
                                   <Grid item xs={3}>
                                      <TextField id="outlined-basic" label="Merchant" variant="standard" disabled />
                                 </Grid>
                                 <Grid item xs={3}>
                                      <TextField id="outlined-basic" label={merchant} variant="standard" disabled />
-                                </Grid>
+                                </Grid> */}
                                 <Grid item xs={3}>
                                      <TextField id="outlined-basic" label="Password" variant="standard" disabled />
                                 </Grid>
@@ -198,9 +203,7 @@ function Profile(){
                                 <Grid item xs={3}>
                                 </Grid>
                                 <Grid item xs={3}>
-                                       {/* <Button variant="outlined" size="medium">
-                                          Edit Profile
-                                        </Button> */}
+                                
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -222,9 +225,11 @@ function Profile(){
                         </tr>
                     </thead>
                     <tbody>
+
                         {txData.slice(0, 10).map((pay, index) => {
                             return <Payment key={index} coin={pay.coin} txid={pay.txid} amount={pay.amountf} address={pay.payment_address} status={pay.status_text} ip={pay.sender_ip} index={index}/>
                         })}
+
                     </tbody>
                     </table>
                       </TabPanel>

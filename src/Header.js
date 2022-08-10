@@ -15,7 +15,7 @@ function Header(props){
               <Link to="/exchange" className="head-nav-button-inverted w-button">Exchange</Link>
               <Link to="/deposit" className="head-nav-button-inverted w-button">Deposit</Link>
               <Link to="/profile" className="head-nav-button-inverted w-button">Profile</Link>
-              <Link to="/" className="head-nav-button-inverted w-button">Log Out</Link>
+              <Link to="/" className="head-nav-button-inverted w-button">Sign Out</Link>
               </nav>
             ) : null}
 
@@ -25,7 +25,7 @@ function Header(props){
                <Link to="/exchange" className="head-nav-button w-button">Exchange</Link>
                <Link to="/deposit" className="head-nav-button-inverted w-button">Deposit</Link>
                <Link to="/profile" className="head-nav-button-inverted w-button">Profile</Link>
-               <Link to="/" className="head-nav-button-inverted w-button">Log Out</Link>
+               <Link to="/" className="head-nav-button-inverted w-button">Sign Out</Link>
                </nav>
             ) : null}
             
@@ -35,7 +35,7 @@ function Header(props){
                <Link to="/exchange" className="head-nav-button-inverted w-button">Exchange</Link>
                <Link to="/deposit" className="head-nav-button w-button">Deposit</Link>
                <Link to="/profile" className="head-nav-button-inverted w-button">Profile</Link>
-               <Link to="/" className="head-nav-button-inverted w-button">Log Out</Link>
+               <Link to="/" className="head-nav-button-inverted w-button">Sign Out</Link>
                </nav>
             ) : null}
 
@@ -45,14 +45,14 @@ function Header(props){
                <Link to="/exchange" className="head-nav-button-inverted w-button">Exchange</Link>
                <Link to="/deposit" className="head-nav-button-inverted w-button">Deposit</Link>
                <Link to="/profile" className="head-nav-button w-button">Profile</Link>
-               <Link to="/" className="head-nav-button-inverted w-button">Log Out</Link>
+               <Link to="/" className="head-nav-button-inverted w-button">Sign Out</Link>
                </nav>
             ) : null}
 
           {props.name == "login" ? (
                <nav role="navigation" className="nav-menu w-nav-menu">
                 <Link to="/login" className="head-nav-button-inverted w-button">Log In</Link>
-                <a href="#signup" className="head-nav-button w-button">Sign Up</a>
+                <a href="#signup" className="head-nav-button w-button">Sign In</a>
                </nav>
             ) : null}
                            

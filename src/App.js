@@ -17,7 +17,7 @@ function App() {
     };
     let response;
     try {
-        response = await fetch(`http://localhost:8080/createUser/${firstname}/${lastname}/${email}/${pass}`, requestOptions);  
+        response = await fetch(`https://test.loobr.com/createUser/${firstname}/${lastname}/${email}/${pass}`, requestOptions);  
         const data = await response.json();  
         setError(data.success);
     } catch (error) {
@@ -26,6 +26,9 @@ function App() {
   }
 
   useEffect(() => {
+    localStorage.removeItem('email');
+    localStorage.removeItem('firstname');
+    localStorage.removeItem('lastname');
     localStorage.removeItem('deposit');
     localStorage.removeItem('main');
     localStorage.removeItem('profile');
